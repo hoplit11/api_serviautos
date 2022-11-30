@@ -1,0 +1,84 @@
+
+# comando de compose para crear proyecto, estrutura con lumen que es un microframework de lavarel que utiliza instrucciones para la creacion de aplicaciones 
+#info https://lumen.laravel.com/docs/9.x
+
+composer create-project --prefer-dist laravel/lumen apirest-servi_autos
+
+# verificacion en el navegador 
+http://localhost/apirest-servi_autos/public/
+
+CONFIGURAR .env
+DB_DATABASE=registros  // es la base de datos creada previamente en localhost/phpMyAdmin
+DB_USERNAME=root  // es el nombre del usuario cuando configuramos heidi
+DB_PASSWORD=  // se deja el campo vacio por ahora
+
+
+
+
+CREACION DE TABLAS 
+# Creacion de entidades por medio de migraciones.
+# En terminal hacer: vamos a crea un atbla nueva en la base de datos clientes ya vinculada en .env
+
+php artisan make:migration registroclientes --create=registroclientes
+
+#Tabla registroautos
+
+php artisan make:migration registroautos --create=registroautos
+
+
+# En apirest-servi_autos/database/migrations se crea automaticamen un archivo php de la tabla registroautos recien creada
+# en el archivo se crea por defecto un constructor que sera el marco de construccion de la tabla
+
+# empezamos creando los campos nombres, apellidos, contraseña2, correo y foto en el constructor de la tabla , asi:
+    public function up()
+    {
+        Schema::create('registroclientes', function (Blueprint $table) {
+            $table->id(); //Campo auto-numerico
+            $table->string('correo', 50); // Se crea un nuevo campo nombre en  la tabla 
+            $table->string('contraseña', 50); // Se crea un nuevo campo contraseña en  la tabla 
+            $table->string('contraseña2', 50); // Se crea un nuevo campo contraseña2 en  la tabla
+            $table->timestamps();
+        });
+    }
+
+# Creacion de la tabla en la base de datos 
+
+php artisan migrate
+
+
+
+22/11/2022  Martes
+
+# Abrimos Postman , abos a APIS  en el panel izquierdo , luego abrimos un requerimiento en el panel celtral don hay un signo  +
+# El panel permite elegir diferentes metodos REST desde GET hasta VIEW, primero vamos al navegador y pegamos la sigiente direcion 
+
+http://127.0.0.1/apirest-servi_autos/public/registroclientes
+
+
+# revisamos que este respodio el contenido de la tabla en fromato json, ahora vamos al Postman y una vez selecionado el metodo get ingresamo la direcion
+# anterion , para observar los datos mas organizados una vez damos click en enviar observamos lo siguiente en postma 
+
+[
+    {
+        "id": 1,
+        "correo": "andres@gmail.com",
+        "contraseña": "44444444",
+        "contraseña2": "55555555",
+        "created_at": null,
+        "updated_at": null
+    }
+]
+
+#INGRESO DE INFORMACION
+# ahora vamos a ingresar informacion atravez del metodo por 
+#vamos  a routes/web.php y agregamos las siguientes lieneas de codigo 
+
+// Insertar informacion 
+$router->post('registroclientes','Controler_registroClientes@insertar');
+
+# Ahora vamos al controlador "Controler_registroClientes.php" y agregamos el siguiente codigo en el interior del constructor 
+    
+    public function insertar(Request $request){
+        return response()->json('En nuestra funcion insertar');
+
+    }
