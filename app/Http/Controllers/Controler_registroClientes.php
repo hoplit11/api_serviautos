@@ -48,14 +48,12 @@ class Controler_registroClientes extends Controller{
     //actualizar registro especifico de la tabla
 
     public function actualizar(Request $request, $id){ /*la funcion consulta recibe el parametro $id desde postman */
-        $dataClientes = new registroClientes; //Instanciar la variable dataClientes
-
         
-        $dataClientes->nombres = $request->input('nombre'); //Requiere la informacion guardada en "nombres" desde postman y los guarda en la varribal nombres que es el campo que esta en la tablaregistroClientes base de datos 
-        $dataClientes->apellidos = $request->input('apellidos');
-        $dataClientes->telefono = $request->input('telefono');
-        $dataClientes->correo = $request->input('correo');
-        $dataClientes->foto = $request->input('foto');
+        $dataClientes = registroClientes::find($id); //Instanciar la variable dataClientes y buscar el registro con $id 
+        
+        $dataClientes->correo = $request->input('correo'); //Requiere la informacion guardada en "nombres" desde postman y los guarda en la varribal nombres que es el campo que esta en la tablaregistroClientes base de datos 
+        $dataClientes->contraseña = $request->input('contraseña');
+        $dataClientes->contraseña2 = $request->input('contraseña2');
 
         $dataClientes->save();  /*Permite guardar la informacion */
 

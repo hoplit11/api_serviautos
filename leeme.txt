@@ -46,10 +46,55 @@ php artisan make:migration registroautos --create=registroautos
 php artisan migrate
 
 
+# Sobre el entorno de VS code dar ctrl+ship + P y colocamos el siguiente comando para crear modelos
+Lumen:Create Model
+ingresamod el nombre de modelo :  registroClientes
+ingresamod el nombre de la tabla :  registroclientes // igual que la tabla de la base de datos "clientes"
+Crear modelo Y/N decir que "yes"
 
+ingresamos el nombre de "controller  Name" :  Controler_registroclientes  //pareacer el archivo controlador
+
+# en la carpeta app/Http/Controllers  se crea un archivo llamado:
+Controler_registroclientes.php
+
+#a continuacion vamos app/models/ y encontramos un nuevo archivo llamado "registroclientes.php "
+# ingresamos al archivo 
+
+
+# Vamos interactuar con nuestra base de datos desde la aplicacion  utilizando un ORM (Modelo de programacion que ayuda a mapear objetos  relacionales)
+
+# Dentro de apirest-1864/boostrap  ingresamos a  app.php y activamos(de-comentamos) la linea 28, asi.
+
+$app->withEloquent(); /*Es un ORM que faciliata la comunicacion con la base de datos mysql por medio del archivo Controler_registroclientes*
+
+#Vamos al archivo Controler_registroclientes para crear una funcion que lea todos los datos de la tabla "registroclientes" que retorne una respuesta en formato json de los datos de la variable "$dataClientes"
+# asi
+
+class Controler_registroclientes extends Controller{
+    public function verClientes(){
+        $dataClientes = registroclientes::all();  // la var. $dataClientesguarda todo los datos de la tabla registroclientes
+        return response()->json($dataClientes); // Retorna una respuesta en formato json de los datos de la variable "$dataClientes"
+    }
+
+}
+
+# Vamos a apirest-1864/routes y abrios el archivo web.php y accedemos a la tabla listacliente como una url, asi
+$router->get('registroclientes','Controler_registroclientes@verClientes' ) ;
+
+# Vamos al navegador http://localhost/apirest-1864/public/registroclientes y observamo los datos de la tabla en formato json
+
+[{"id":1,"nombres":"Oscar","apellidos":"Porto Solano","telefono":"555555555","correo":"oscar@gmai.com","foto":"\/fotos\/foto.png\r\n","created_at":"2022-11-29T00:50:44.000000Z","updated_at":"2022-11-29T00:50:45.000000Z"},{"id":2,"nombres":"Cristian David","apellidos":"Fernandez","telefono":"dffsdsf","correo":"cris@gmail.com","foto":"","created_at":"2022-11-29T00:59:53.000000Z","updated_at":"2022-11-29T00:59:53.000000Z"}]
+
+
+# Tarea descargar Postman que sirve como un FrontEnd para consumir nuestra API y poder provar, construir y diseñar la API otra alternativa es 
+#insomnia
+
+
+
+_______________________________________________________________________________________________
 22/11/2022  Martes
 
-# Abrimos Postman , abos a APIS  en el panel izquierdo , luego abrimos un requerimiento en el panel celtral don hay un signo  +
+# Abrimos Postman , ambos a APIS  en el panel izquierdo , luego abrimos un requerimiento en el panel celtral don hay un signo  +
 # El panel permite elegir diferentes metodos REST desde GET hasta VIEW, primero vamos al navegador y pegamos la sigiente direcion 
 
 http://127.0.0.1/apirest-servi_autos/public/registroclientes
@@ -82,3 +127,12 @@ $router->post('registroclientes','Controler_registroClientes@insertar');
         return response()->json('En nuestra funcion insertar');
 
     }
+
+
+# Sobre el entorno de VS code dar ctrl+ship + P y colocamos el siguiente comando pra crear modelos
+Lumen:Create Model
+ingresamod el nombre de modelo :  registroclientes
+ingresamod el nombre de la tabla :  registroclientes // igual que la tabla de la base de datos "clientes"
+Crear modelo Y/N decir que "yes"
+
+ingresamos el nombre de "controller  Name" :  Controler_registroclientes  //pareacer el archivo controlador

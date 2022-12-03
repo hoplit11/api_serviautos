@@ -32,3 +32,4 @@ class Registroclientes extends Migration
         Schema::dropIfExists('registroclientes');
     }
 }
+
