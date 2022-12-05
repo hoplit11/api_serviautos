@@ -43,11 +43,9 @@ DB_USERNAME=root  // es el nombre del usuario cuando configuramos heidi
 DB_PASSWORD=  // se deja el campo vacio por ahora
 
 
-
-
-CREACION DE TABLAS 
-# Creacion de entidades por medio de migraciones.
-# En terminal hacer: vamos a crea un atbla nueva en la base de datos clientes ya vinculada en .env
+## CREACIÓN DE TABLAS 
+# Creación de entidades por medio de migraciones.
+# En terminal hacer: vamos a crea un tabla nueva en la base de datos clientes ya vinculada en .env
 
 php artisan make:migration registroclientes --create=registroclientes
 
