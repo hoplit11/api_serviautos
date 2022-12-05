@@ -22,3 +22,36 @@ If you discover a security vulnerability within Lumen, please send an e-mail to 
 ## License
 
 The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+_____________________________________________________________________________________
+
+#Instalacions del gestor de paquetes para programar en PHP
+
+// ingresar a https://getcomposer.org y descargar composer e instalarlo , tambien ingresar a https://www.apachefriends.org/es/index.html y descargar el gestor de servidor
+## Instalacion de un proyecto utilizando composer 
+# comando de compose para crear proyecto, estrutura con lumen que es un microframework de lavarel que utiliza instrucciones para la creacion de aplicaciones 
+#info https://lumen.laravel.com/docs/9.x
+
+composer create-project --prefer-dist laravel/lumen apirest-servi_autos
+
+# verificacion en el navegador 
+http://localhost/apirest-servi_autos/public/
+
+CONFIGURAR .env
+DB_DATABASE=registros  // es la base de datos creada previamente en localhost/phpMyAdmin
+DB_USERNAME=root  // es el nombre del usuario cuando configuramos heidi
+DB_PASSWORD=  // se deja el campo vacio por ahora
+
+
+
+
+CREACION DE TABLAS 
+# Creacion de entidades por medio de migraciones.
+# En terminal hacer: vamos a crea un atbla nueva en la base de datos clientes ya vinculada en .env
+
+php artisan make:migration registroclientes --create=registroclientes
+
+#Tabla registroautos
+
+php artisan make:migration registroautos --create=registroautos
+
